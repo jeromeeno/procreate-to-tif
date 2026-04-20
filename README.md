@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180">
 </p>
 
