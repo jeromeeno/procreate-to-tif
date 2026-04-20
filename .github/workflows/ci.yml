@@ -35,6 +35,14 @@ jobs:
         run: brew install lzo
 
       - name: Install Python dependencies
+        env:
+          LZO_PREFIX: ${{ runner.os == 'macOS' && '/opt/homebrew/opt/lzo' || '' }}
+          CPPFLAGS: ${{ runner.os == 'macOS' && '-I/opt/homebrew/opt/lzo/include' || '' }}
+          CFLAGS: ${{ runner.os == 'macOS' && '-I/opt/homebrew/opt/lzo/include' || '' }}
+          LDFLAGS: ${{ runner.os == 'macOS' && '-L/opt/homebrew/opt/lzo/lib' || '' }}
+          C_INCLUDE_PATH: ${{ runner.os == 'macOS' && '/opt/homebrew/opt/lzo/include' || '' }}
+          LIBRARY_PATH: ${{ runner.os == 'macOS' && '/opt/homebrew/opt/lzo/lib' || '' }}
+          PKG_CONFIG_PATH: ${{ runner.os == 'macOS' && '/opt/homebrew/opt/lzo/lib/pkgconfig' || '' }}
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
