@@ -1,9 +1,10 @@
 # procreate-to-tif v 0.1.0
 
   <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180" align=left>
-Convert `.procreate` archive files into layered Photoshop PSDs, flat PNG/JPG renders, optional animated WebP/GIF exports, and stitched timelapse MP4s.
+Convert `.procreate` archive files into layered Photoshop PSDs, flat PNG/JPG
+renders, optional animated WebP/GIF exports, and stitched timelapse MP4s.
 
-This project is useful when you want to batch-convert Procreate archives on a Mac without manually opening each file on an iPad.
+The Python CLI is cross-platform. The included GUI is macOS-only.
 
 
 
@@ -21,10 +22,24 @@ This project is useful when you want to batch-convert Procreate archives on a Ma
 
 ## Installation
 
-`python-lzo` depends on the native LZO library. On macOS:
+`python-lzo` depends on the native LZO library.
+
+On macOS:
 
 ```bash
 brew install lzo
+```
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt-get install -y liblzo2-dev ffmpeg
+```
+
+On Fedora:
+
+```bash
+sudo dnf install -y lzo-devel ffmpeg
 ```
 
 For normal CLI use:
@@ -41,6 +56,9 @@ For contributor setup, install the developer extras instead:
 ```bash
 pip install -e ".[dev]"
 ```
+
+The CLI install and test path is exercised in CI on both Ubuntu and macOS. The
+SwiftUI companion app remains a separate macOS-only target.
 
 ## Usage
 
@@ -106,7 +124,7 @@ This launcher stages a real local `.app` bundle in `dist/ProArchive Converter.ap
 so the app opens with proper bundle metadata and icon instead of the generic
 `exec` icon you get from running the raw SwiftPM executable directly. The first
 two commands build and stage the Python backend that the GUI uses for actual
-conversion work.
+conversion work. These build-and-bundle steps are for macOS only.
 
 ## Support
 

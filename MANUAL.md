@@ -11,6 +11,7 @@ This tool converts `.procreate` archives into multiple export formats:
 - Stitched timelapse MP4 from `video/segments/segment-*.mp4`
 
 By default, outputs are written to `./exports`.
+The Python CLI is cross-platform; the SwiftUI companion app is macOS-only.
 
 ## Requirements
 
@@ -20,6 +21,7 @@ By default, outputs are written to `./exports`.
 ### Python packages
 Installed from `requirements.txt`:
 - `python-lzo`
+- `lz4`
 - `Pillow`
 - `numpy`
 - `pytoshop`
@@ -30,11 +32,23 @@ Installed from `requirements.txt`:
   - macOS: `brew install lzo`
 - `ffmpeg` (required for multi-segment timelapse MP4 stitching)
 
+Suggested Linux packages:
+
+- Debian/Ubuntu: `liblzo2-dev` and `ffmpeg`
+- Fedora: `lzo-devel` and `ffmpeg`
+
 ## Installation
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+If you plan to run the tests or work on the project, install the developer
+extras instead:
+
+```bash
+pip install -e ".[dev]"
 ```
 
 ## Entry Points
@@ -73,6 +87,15 @@ python convert.py --no-psd --flat-png --flat-jpg "MyArtwork.procreate"
 ```bash
 python convert.py --flat-png --flat-jpg --animated-webp --animated-gif --timelapse-mp4 FilesToConvert/*.procreate
 ```
+
+## Linux Notes
+
+- The CLI runs on Linux once `python-lzo`, `lz4`, and `ffmpeg` are installed.
+- The macOS-specific `compression_tool` and `/usr/lib/libcompression.dylib`
+  fallback are optional and only used when present.
+- The editable install and test path is verified in Ubuntu CI with
+  `pip install -e ".[dev]"` and `pytest -q`.
+- The macOS GUI and packaging steps in this manual do not apply on Linux.
 
 ## CLI Reference
 

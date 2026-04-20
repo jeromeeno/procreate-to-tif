@@ -1,31 +1,18 @@
 from __future__ import annotations
 
-import shutil
-import subprocess
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
 
 import numpy as np
+import lz4.block
 
 from procreate_to_tif.tile_decoder import layer_has_chunks, reconstruct_layer
 
 
 def _encode_lz4(payload: bytes) -> bytes:
-    compression_tool = shutil.which("compression_tool")
-    if compression_tool is None:
-        raise unittest.SkipTest("compression_tool not available on this system")
-
-    result = subprocess.run(
-        [compression_tool, "-encode", "-a", "lz4"],
-        input=payload,
-        capture_output=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(result.stderr.decode("utf-8", "ignore"))
-    return result.stdout
+    return lz4.block.compress(payload, store_size=False)
 
 
 class TileDecoderLz4Tests(unittest.TestCase):

@@ -25,3 +25,4 @@ DerivedData/
 dist/
 packaging/.build/
 macos-app/ProArchiveConverter/backend-bundle/
+LINUX_CLI_BACKLOG.local.md

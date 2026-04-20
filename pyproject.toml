@@ -27,6 +27,7 @@ classifiers = [
 ]
 dependencies = [
   "python-lzo",
+  "lz4",
   "Pillow",
   "numpy",
   "pytoshop",

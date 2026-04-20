@@ -5,8 +5,15 @@ on:
   pull_request:
 
 jobs:
-  test:
-    runs-on: macos-latest
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Check out repository
@@ -17,7 +24,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install system dependencies
+      - name: Install system dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y liblzo2-dev ffmpeg
+
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
         run: brew install lzo
 
       - name: Install Python dependencies
@@ -30,6 +44,13 @@ jobs:
 
       - name: Build Python package
         run: python -m build
+
+  macos-app:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Run Swift package tests
         run: swift test --package-path macos-app/ProArchiveConverter

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 import lzo
+import lz4.block
 from PIL import Image
 
 
@@ -58,6 +59,13 @@ def _compression_tool_decode_lz4(src: bytes) -> bytes | None:
     if result.returncode != 0:
         return None
     return result.stdout
+
+
+def _lz4_block_decode_lz4(src: bytes, dst_size: int) -> bytes | None:
+    try:
+        return lz4.block.decompress(src, uncompressed_size=dst_size)
+    except Exception:
+        return None
 
 
 def _chunk_dimensions(
@@ -133,11 +141,14 @@ def _decompress_chunk(
     elif codec == "lz4":
         raw = _compression_decode_lz4(compressed, expected_rgba_size)
         if raw is None:
+            raw = _lz4_block_decode_lz4(compressed, expected_rgba_size)
+        if raw is None:
             raw = _compression_tool_decode_lz4(compressed)
         if raw is None:
             raise RuntimeError(
                 f"LZ4 decode failed for {layer_uuid}/{col}~{row}.lz4. "
-                "On macOS, ensure /usr/lib/libcompression.dylib or compression_tool is available."
+                "Install a cross-platform LZ4 decoder or, on macOS, ensure "
+                "/usr/lib/libcompression.dylib or compression_tool is available."
             )
         if len(raw) == expected_rgba_size:
             return raw, 4

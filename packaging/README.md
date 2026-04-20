@@ -1,6 +1,8 @@
 # Backend Packaging
 
 This folder contains scripts for building a bundled Python backend CLI for the macOS app.
+These scripts are for the macOS app only; Linux users should run the CLI
+directly rather than using this packaging flow.
 
 ## Build Bundled CLI
 
