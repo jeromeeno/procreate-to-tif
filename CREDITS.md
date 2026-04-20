@@ -1,8 +1,9 @@
 # Credits
 
 ## AI & Development Tools
-- **Code Generation**: All coding for this application was performed 100% within **Antigravity**, leveraging a combination of **Claude** and **Gemini** AI models.
-- **Inline Assistance**: Additional code generation and assistance were provided by **Codex** via the VSCode extension installed within Antigravity.
+- **Development Collaboration**: Development work on this project was shared across **Antigravity** and **Codex**.
+- **Antigravity**: Contributed substantial coding and iteration using a combination of **Claude** and **Gemini** AI models.
+- **Codex**: Contributed implementation, cleanup, packaging, testing, documentation, and open-source release preparation.
 - **Design**: The application icon was created and generated using **Recraft**.
 
 ## Python Ecosystem
