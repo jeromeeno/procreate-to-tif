@@ -1,5 +1,5 @@
 
-  <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180" align=left># procreate-to-tif v 0.1.0
+ <p></p> <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180" align=left># procreate-to-tif v 0.1.0</p>
 
 Convert `.procreate` archive files into layered Photoshop PSDs, flat PNG/JPG renders, optional animated WebP/GIF exports, and stitched timelapse MP4s.
 
