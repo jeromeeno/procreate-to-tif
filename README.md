@@ -1,14 +1,17 @@
+# procreate-to-tif v 0.1.0
+
 <p align="left">
-  <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180"># procreate-to-tif
+  <img src="logo-assets/stylusflame.svg" alt="procreate-to-tif logo" width="180">
+</p>
+<p>Convert `.procreate` archive files into layered Photoshop PSDs, flat PNG/JPG
+renders, optional animated WebP/GIF exports, and stitched timelapse MP4s.</p>
+<p></p>This project is useful when you want to batch-convert Procreate archives on a
+Mac without manually opening each file on an iPad.
 </p>
 
 
 
-Convert `.procreate` archive files into layered Photoshop PSDs, flat PNG/JPG
-renders, optional animated WebP/GIF exports, and stitched timelapse MP4s.
 
-This project is useful when you want to batch-convert Procreate archives on a
-Mac without manually opening each file on an iPad.
 
 ## Features
 
